@@ -1,23 +1,44 @@
 <template>
-    <div class="pb-input">
+    <div :class="['pb-input', isFocus ? 'pb-input-focus' : '']">
         <div class="pb-input-prefix">
             <slot name="prefix"></slot>
         </div>
-        <div class="pb-input-wrapper">
-            <input ref="inputRef" v-model="value" @focus="" />
+        <div class="pb-input-wrapper" :style="{ 'border-left-width': showPrefixBorder ? '1px' : '0', 'border-right-width': showSuffixBorder ? '1px' : '0' }">
+            <input ref="inputRef" v-model="value" @focus="onfocus" @input="oninput" @change="onchange" @blur="onblur" :placeholder="placeholder" />
         </div>
         <div class="pb-input-suffix">
             <slot name="suffix"></slot>
         </div>
-        
     </div>
 </template>
 <script setup name="PbInput">
 import { ref } from "vue";
 const value = ref();
 const inputRef = ref();
-const emits = defineEmits(['focus', 'input', 'change', 'blur'])
 
+const props = defineProps({
+    placeholder: String,
+    showPrefixBorder: { type: Boolean, default: () => false },
+    showSuffixBorder: { type: Boolean, default: () => false },
+})
+const emits = defineEmits(['focus', 'input', 'change', 'blur']);
+const isFocus = ref(false);
+
+const onfocus = (e) => {
+    isFocus.value = true;
+    emits('focus', e);
+}
+const oninput = (e) => {
+    emits('input', e);
+}
+const onchange = (e) => {
+    emits('change', e);
+}
+
+const onblur = (e) => {
+    isFocus.value = false;
+    emits('blur', e);
+}
 const focus = () => {
     inputRef.value.focus();
 }
@@ -49,21 +70,28 @@ input:active {
     border-radius: 4px;
     overflow: hidden;
     box-sizing: border-box;
+    background-color: transparent;
 }
 
-.pb-input-prefix ,pb-input-suffix  {
+.pb-input-focus {
+    border-color: var(--input-active-color);
+}
+
+.pb-input-prefix,
+pb-input-suffix {
     flex-shrink: 1;
 }
 
-.pb-input-wrapper input{
+.pb-input-wrapper input {
     height: 100%;
 }
-.pb-input-wrapper{
+
+.pb-input-wrapper {
     flex: 1;
-    border-left: 1px solid var(--input-border-color);
-    border-right: 1px solid var(--input-border-color);
     display: flex;
+    border-width: 0;
+    border-left-color: var(--input-border-color);
+    border-right-color: var(--input-border-color);
+    border-style: solid;
 }
-
-
 </style>
