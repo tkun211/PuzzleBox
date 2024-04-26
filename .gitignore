@@ -1,0 +1,50 @@
+﻿﻿.DS_Store
+
+.idea/
+target/
+/dist
+**/dist
+
+# local env files
+.env.local
+.env.*.local
+
+*.class
+*.iml
+*.log
+*.ctxt
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+#node
+node_modules/
+session_data/
+
+# python
+__pycache__/
+
+package-lock.json
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+**/.vitepress/cache/
