@@ -1,0 +1,29 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		
+		{
+		    "path" : "pages/read/MyRead",
+			"enablePullDownRefresh": false,
+			"navigationStyle":"custom",
+			"style": {
+				"app-plus": {  
+				    "titleNView": false
+				}
+			}
+		}
+        
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "阅读书城",
+		"navigationBarBackgroundColor": "#0b0c21",
+		"backgroundColor": "#0b0c21"
+	},
+	"tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#007AFF",
+    "borderStyle": "black",
+    "backgroundColor": "#111227",
+    "list": []
+}
+}
